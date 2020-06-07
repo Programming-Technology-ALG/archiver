@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		42836C4A248D6DB4007C5B99 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 42836C49248D6DB4007C5B99 /* main.c */; };
+		42836C52248D6EB9007C5B99 /* huffman.c in Sources */ = {isa = PBXBuildFile; fileRef = 42836C50248D6EB9007C5B99 /* huffman.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		42836C46248D6DB4007C5B99 /* archiver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = archiver; sourceTree = BUILT_PRODUCTS_DIR; };
 		42836C49248D6DB4007C5B99 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		42836C50248D6EB9007C5B99 /* huffman.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = huffman.c; sourceTree = "<group>"; };
+		42836C51248D6EB9007C5B99 /* huffman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = huffman.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,8 @@
 		42836C48248D6DB4007C5B99 /* archiver */ = {
 			isa = PBXGroup;
 			children = (
+				42836C50248D6EB9007C5B99 /* huffman.c */,
+				42836C51248D6EB9007C5B99 /* huffman.h */,
 				42836C49248D6DB4007C5B99 /* main.c */,
 			);
 			path = archiver;
@@ -120,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42836C4A248D6DB4007C5B99 /* main.c in Sources */,
+				42836C52248D6EB9007C5B99 /* huffman.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
