@@ -28,6 +28,9 @@
 		42836C49248D6DB4007C5B99 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		42836C50248D6EB9007C5B99 /* huffman.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = huffman.c; sourceTree = "<group>"; };
 		42836C51248D6EB9007C5B99 /* huffman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = huffman.h; sourceTree = "<group>"; };
+		42836C53248D70D2007C5B99 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		42836C55248D71E7007C5B99 /* unpacked.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unpacked.txt; sourceTree = "<group>"; };
+		42836C56248D71F4007C5B99 /* packed.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = packed.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +49,9 @@
 			children = (
 				42836C48248D6DB4007C5B99 /* archiver */,
 				42836C47248D6DB4007C5B99 /* Products */,
+				42836C55248D71E7007C5B99 /* unpacked.txt */,
+				42836C56248D71F4007C5B99 /* packed.txt */,
+				42836C53248D70D2007C5B99 /* test.txt */,
 			);
 			sourceTree = "<group>";
 		};

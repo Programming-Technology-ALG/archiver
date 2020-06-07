@@ -9,12 +9,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "huffman.h"
-#include "locale.h"
 #include <string.h>
 
 int main(int argc, const char * argv[]) {
-    if(argc < 4)
-        return -1;
+    if(argc != 3){
+        puts("not enough input arguments (you need 3 txt files)\n");
+        return 1;
+    }
     unsigned char codes[SIZE][CODE_SIZE] = { 0 };
     long bitstringLength, fileLength;
     PackFile(argv[1], argv[2], &bitstringLength, &fileLength);
