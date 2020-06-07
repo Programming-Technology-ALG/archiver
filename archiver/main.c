@@ -16,7 +16,6 @@ int main(int argc, const char * argv[]) {
         puts("not enough input arguments (you need 3 txt files)\n");
         return 1;
     }
-    unsigned char codes[SIZE][CODE_SIZE] = { 0 };
     long bitstringLength, fileLength;
     PackFile(argv[1], argv[2], &bitstringLength, &fileLength);
     printf("File packed to: %s\n", argv[2]);

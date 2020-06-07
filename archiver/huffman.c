@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define SIZE 100000
+//#define SIZE 100000
 #define CODE_SIZE 40
 #define BIT8 8
 
@@ -54,9 +54,9 @@ NODE * MakeNodeFromNode(const NODE * left, const NODE * right){
     NODE * res = (NODE*)malloc(sizeof(NODE));
     res->freq = left->freq + right->freq;
     res->isSymb = 0;
-    res->symb =
-    res->left = left;
-    res->right = right;
+//    res->symb = (struct node *);
+    res->left = (struct node *)left;
+    res->right = (struct node *)right;
     res->next = 0;
     return res;
 }
@@ -99,7 +99,7 @@ NODE * MakeTreeFromList(NODE * head){
 
 void MakeCodeInTree(NODE* root, int level, unsigned char* prev_code, unsigned char added){
     if (root){
-        strcpy(root->code, prev_code);
+        strcpy((char *)root->code, (const char *)prev_code);
         root->code[level] = added;
         root->code[level + 1] = 0;
         root->level = level;
@@ -120,7 +120,7 @@ void MakeTableFromTree(NODE * root, char (*code)[CODE_SIZE]){
     if (root){
         MakeTableFromTree(root->left, code);
         if (root->isSymb){
-            strcpy(code[root->symb], root->code);
+            strcpy(code[root->symb], (const char *)root->code);
         }
         MakeTableFromTree(root->right, code);
     }
@@ -131,7 +131,7 @@ void PrintTableCodes(unsigned char(*code) [CODE_SIZE]){
     if (!fw)
         return;
     for (int i = 0; i < SIZE; ++i){
-        if(strlen(code[i])) {
+        if(strlen((const char *)code[i])) {
             fprintf(fw, "%c - %s\n", (unsigned char)i, code[i]);
         }
     }
@@ -141,18 +141,16 @@ void PrintTableCodes(unsigned char(*code) [CODE_SIZE]){
 char* MakeBitString(const char * from, int len, unsigned char(*code)[CODE_SIZE]) {
     char * bitstr = (char*)calloc(len * BIT8, sizeof(char));
     FILE* fr = fopen(from, "rb");
-    if (!fr)
-        return -1;
     for (int i = 0; i < len; ++i){
         unsigned char c = fgetc(fr);
-        strcat(bitstr, code[c]);
+        strcat(bitstr, (const char *)code[c]);
     }
     fclose(fr);
     return bitstr;
 }
 
 char* FromBitToChar(const char * str, int * tail, int * len){
-    int count = strlen(str) / BIT8;
+    int count = (int)strlen(str) / BIT8;
     *tail = strlen(str) % BIT8;
     *len = count + 1;
     BIT2CHAR symb;
@@ -200,12 +198,12 @@ void PackFile(const char * from, const char * to, long *bitstringLength, long *f
     head = MakeListFromArray(freq) ;
     NODE * root = 0;
     root = MakeTreeFromList(head) ;
-    MakeCodeInTree(root->left, 0, "", '0');
-    MakeCodeInTree(root->right, 0, "", '1');
+    MakeCodeInTree(root->left, 0, (unsigned char *)"", '0');
+    MakeCodeInTree(root->right, 0, (unsigned char *)"", '1');
     unsigned char codes[SIZE][CODE_SIZE] = { 0 };
-    MakeTableFromTree(root, codes);
+    MakeTableFromTree(root, (char (*)[40])codes);
     PrintTableCodes (codes) ;
-    char * bitstring = MakeBitString(from, len, codes);
+    char * bitstring = MakeBitString(from, (int)len, codes);
     *bitstringLength = strlen(bitstring);
     int reslen = 0;
     int tail = 0;
@@ -227,7 +225,7 @@ void UnpackFile(const char * from, const char * to, long bitstringLength, long f
     fseek(fr, 0, SEEK_SET);
     char *str = (char *)malloc((length + 1) * sizeof(char));
     int nread;
-    while((nread = fread(str, 1, length, fr)) >0){
+    while((nread = (int)fread(str, 1, length, fr)) >0){
         printf("READING ZIP...\n");
     }
     fclose(fr);
@@ -235,7 +233,7 @@ void UnpackFile(const char * from, const char * to, long bitstringLength, long f
     if(str == NULL) {
         puts("Empty");
         return;
-    } 
+    }
     char *binary = (char *)malloc(length*8 + 1);
     binary[0] = '\0';
     long binLen = 0;
@@ -278,7 +276,6 @@ void UnpackFile(const char * from, const char * to, long bitstringLength, long f
     if (!fcodes)
         return;
     fseek(fcodes, 0, SEEK_END);
-//    long lencodes = ftell(fcodes);
     fseek(fcodes, 0, SEEK_SET);
 
     char * line = NULL;
@@ -350,7 +347,7 @@ void UnpackFile(const char * from, const char * to, long bitstringLength, long f
         }
         offset += c;
         c = 0;
-    }    
+    }
 
     char *wstr = (char *)malloc((symc + 1) * sizeof(char));
     strncpy(wstr, resstr, symc);
@@ -363,7 +360,6 @@ void UnpackFile(const char * from, const char * to, long bitstringLength, long f
     free(resstr);
     free(wstr);
 }
-
 
 
 void inplace_reverse(char * str, long lenght){
