@@ -7,19 +7,16 @@
 //
 
 #include <stdio.h>
-#include <stdlib.h>
 #include "huffman.h"
-#include <string.h>
 
-int main(int argc, const char * argv[]) {
+int main(int argc, char * argv[]) {
     if(argc != 3){
-        puts("not enough input arguments (you need 3 txt files)\n");
+        puts("Not enough input arguments (you need 3 txt files)\n");
         return 1;
     }
-    long bitstringLength, fileLength;
-    PackFile(argv[1], argv[2], &bitstringLength, &fileLength);
+    PackFile(argv[1], argv[2]);
     printf("File packed to: %s\n", argv[2]);
-    UnpackFile(argv[2], argv[3], bitstringLength, fileLength);
+    UnpackFile(argv[2], argv[3]);
     printf("File unpacked to: %s\n", argv[3]);
     return 0;
 }

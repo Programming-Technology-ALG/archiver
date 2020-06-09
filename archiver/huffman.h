@@ -6,9 +6,7 @@
 //  Copyright © 2020 Алексей Трутнев. All rights reserved.
 //
 
-#define SIZE 256
 #define CODE_SIZE 40
-#define BIT8 8
 
 typedef struct node {
     unsigned char symb;
@@ -18,6 +16,15 @@ typedef struct node {
     int level;
     struct node * left, *right, *next;
 }NODE;
+
+NODE * MakeNodeFromFreq(unsigned char symb, unsigned int freq);
+NODE * MakeNodeFromNode(const NODE * left, const NODE * right);
+NODE * MakeListFromArray(int * freq);
+NODE * MakeTreeFromList(NODE * head);
+void Add2List(NODE ** head, NODE * pnew);
+void MakeCodeInTree(NODE* root, int level, unsigned char* prev_code, unsigned char added);
+void PrintTree(NODE* root);
+void MakeTableFromTree(NODE * root, char (*code)[CODE_SIZE]);
 
 typedef union bit2char {
     char symb;
@@ -33,22 +40,11 @@ typedef union bit2char {
     }mbit;
 }BIT2CHAR;
 
-long CalcFreqSymb(const char * from, int* freq);
-void PrintFreq(int * freq);
-NODE * MakeNodeFromFreq(unsigned char symb, unsigned int freq);
-NODE * MakeNodeFromNode(const NODE * left, const NODE * right);
-void Add2List(NODE ** head, NODE * pnew);
-NODE * MakeListFromArray(int * freq);
-void PrintList(NODE * head);
-NODE * MakeTreeFromList(NODE * head);
-void MakeCodeInTree(NODE* root, int level, unsigned char* prev_code, unsigned char added);
-void PrintTree(NODE* root);
-void MakeTableFromTree(NODE * root, char (*code)[CODE_SIZE]);
 void PrintTableCodes(unsigned char(*code) [CODE_SIZE]);
+void WriteFile(const char * to, char * res, int len, int tail);
+void PackFile(const char * from, const char * to);
+void UnpackFile(const char * from, const char * to);
+long CalcFreqSymb(const char * from, int* freq);
 char* MakeBitString(const char * from, int len, unsigned char(*code)[CODE_SIZE]);
 char* FromBitToChar(const char * str, int * tail, int * len);
-void WriteFile(const char * to, char * res, int len);
-void PackFile(const char * from, const char * to, long *bitstringLength, long *fileLength);
-void UnpackFile(const char * from, const char * to, long bitstringLength, long fileLength);
 char* stringToBinary(char* s, int len, long bitstringLength);
-void inplace_reverse(char * str, long lenght);
